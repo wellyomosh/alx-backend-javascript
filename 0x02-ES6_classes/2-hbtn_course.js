@@ -1,59 +1,38 @@
 export default class HolbertonCourse {
-    constructor(name, length, students) {
-        if (typeof name !== "string") {
-            throw TypeError("Name must be a string")
-        }
-        if ( typeof length !== "number") {
-            throw TypeError("Length must be a number")
-        }
-        if (students.constructor !== Array && students.every((items) => typeof items !== "string")) {
-            throw TypeError("students must be an array of string.")
-        }
-        this._name = name;
-        this._leghth = length;
-        this._students = students;
+  constructor(name, length, students) {
+    this.name = name;
+    this.length = length;
+    this.students = students;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(val) {
+    if (typeof val !== 'string') { throw new TypeError('Name must be a string'); }
+    this._name = val;
+  }
+
+  get length() {
+    return this._length;
+  }
+
+  set length(val) {
+    if (typeof val !== 'number') { throw new TypeError('Length must be a number'); }
+    this._length = val;
+  }
+
+  get students() {
+    return this._students;
+  }
+
+  set students(val) {
+    if (!Array.isArray(val)) { throw new TypeError('Students must be an array'); }
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < val.length; i++) {
+      if (typeof val[i] !== 'string') { throw new TypeError('Students must be an array of strings'); }
     }
-
-    //name getternmethod
-    get name() {
-        return this._name;
-    }
-
-    //names settermethod
-    set name(name) {
-        if (typeof name === "string") {
-            this._name = name;
-        } else {
-            throw TypeError("Name must be a string")
-        }
-    }
-
-    //gettermethod for length
-    get length() {
-        return this._length;
-    };
-
-    //lengthsetter method
-    set length(length) {
-        if ( typeof length === "number" ) {
-            this._leghth = length;
-        } else {
-            throw TypeError("Length must be a number")
-        }
-    }
-
-    //gettermethod for students
-    get students() {
-        return this._students;
-    };
-
-    //studentsSetter method
-    set students(students) {
-        if (students.constructor !== Array && students.every((items) => typeof items !== "string")) {
-            throw TypeError("students must be an array of string.")
-        } else {
-            this._students = students;
-        }
-    }
+    this._students = val;
+  }
 }
-
